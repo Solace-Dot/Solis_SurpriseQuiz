@@ -1,0 +1,90 @@
+# Personal Portfolio Website (Solis_SurpriseQuiz)
+
+This is a personal portfolio website built with Django to showcase my projects and skills. The project is named `Solis_SurpriseQuiz` and it contains an app named `portfolio`.
+
+## Features
+
+- A home page to display a list of projects.
+- A dedicated about page.
+- A separate Django app (`portfolio`) for managing portfolio projects.
+- Uses Bootstrap for styling.
+
+## Project Structure
+
+
+Solis_SurpriseQuiz/
+├── Solis_SurpriseQuiz/
+│   ├── settings.py
+│   └── urls.py
+├── portfolio/
+│   ├── models.py
+│   ├── views.py
+│   └── urls.py
+├── templates/
+│   ├── base.html
+│   ├── home.html
+│   └── about.html
+├── static/
+│   └── css/
+│       └── bootstrap.min.css
+├── manage.py
+├── README.md
+├── requirements.txt
+└── .gitignore
+
+
+## Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone <your-github-repository-url>
+    cd Solis_SurpriseQuiz
+    ```
+
+2.  **Create and activate a virtual environment:**
+    ```bash
+    # For Windows
+    python -m venv venv
+    venv\Scripts\activate
+
+    # For macOS/Linux
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
+
+3.  **Install the dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Download Bootstrap:**
+    - Download the compiled CSS and JS for Bootstrap from [getbootstrap.com](https://getbootstrap.com/docs/5.3/getting-started/download/).
+    - Unzip the file and place `bootstrap.min.css` into the `static/css/` directory.
+
+5.  **Apply migrations:**
+    ```bash
+    python manage.py migrate
+    ```
+
+6.  **Create a superuser to access the admin panel:**
+    ```bash
+    python manage.py createsuperuser
+    ```
+    Follow the prompts to create a username and password.
+
+7.  **Run the development server:**
+    ```bash
+    python manage.py runserver
+    ```
+    The website will be available at `http://127.0.0.1:8000/`.
+
+## Routes
+
+-   `/`: Home page, displays all projects. (name='home')
+-   `/about/`: About page. (name='about')
+-   `/admin/`: Django admin panel to manage projects.
+
+## Usage
+
+-   To add a new project, go to the admin panel (`/admin/`), log in with your superuser credentials, and add a new `Project` object.
+-   Customize the `home.html` and `about.html` templates in the `templates` directory to personalize your portfolio.

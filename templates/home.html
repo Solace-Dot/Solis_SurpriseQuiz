@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | My Portfolio</title>
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar {
+            background-color: #1a1a1a;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #E0BFB8 !important;
+            font-weight: 600;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #B76E79 !important;
+        }
+        main {
+            flex: 1;
+        }
+        footer {
+            background-color: #000000;
+            color: #999999;
+            padding: 1.5rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(183, 110, 121, 0.1);
+        }
+        .hero-section {
+            background-color: #1a1a1a;
+            padding: 6rem 0;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            color: #E0BFB8;
+            border: 1px solid rgba(183, 110, 121, 0.2);
+        }
+        .card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(183, 110, 121, 0.2);
+        }
+        .card:hover {
+            transform: translateY(-0.25rem);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .card-title {
+            color: #E0BFB8;
+        }
+        .card-text.text-secondary {
+            color: #cccccc !important;
+        }
+        .card-footer.text-muted {
+            color: #aaaaaa !important;
+            background-color: #000000;
+            border-top: 1px solid rgba(183, 110, 121, 0.1);
+        }
+        .btn-primary {
+            background-color: #E0BFB8;
+            border-color: #E0BFB8;
+            color: #1a1a1a;
+        }
+        .btn-primary:hover {
+            background-color: #B76E79;
+            border-color: #B76E79;
+            color: #1a1a1a;
+        }
+        .text-light {
+            color: #f0f0f0 !important;
+        }
+        .text-secondary {
+            color: #cccccc !important;
+        }
+        .border-secondary {
+            border-color: rgba(183, 110, 121, 0.2) !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fs-4 fw-bold" href="{% url 'home' %}">My Portfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2 rounded active" aria-current="page" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2 rounded" href="{% url 'about' %}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2 rounded" href="#">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2 rounded" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <section class="text-center rounded-lg shadow-md mb-5 hero-section">
+            <h1 class="display-3 fw-bold mb-3">
+                Hi, I'm Solaced
+            </h1>
+            <p class="lead mb-4">
+                Full-Stack Developer | Tech Enthusiast
+            </p>
+        </section>
+
+        <hr class="my-5 border-secondary">
+
+        <section id="projects" class="mb-5">
+            <h2 class="text-center mb-4 text-light">My Projects</h2>
+
+            <div class="row g-4">
+                {% if projects %}
+                    {% for project in projects %}
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ project.name }}</h5>
+                                <p class="card-text text-secondary">{{ project.description }}</p>
+                                {% if project.link %}
+                                    <a href="{{ project.link }}" class="btn btn-primary" target="_blank">View Project</a>
+                                {% endif %}
+                            </div>
+                            <div class="card-footer text-muted">
+                                Created: {{ project.created_at|date:"F d, Y" }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12 text-center text-secondary">
+                        <p>No projects to display yet. Please add some from the admin panel!</p>
+                        <div class="row g-4 mt-4">
+                            <div class="col-md-4">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Placeholder Project 1</h5>
+                                        <p class="card-text text-secondary">This is a description for a placeholder project. You can replace this with your actual project details.</p>
+                                        <a href="#" class="btn btn-primary">View Project</a>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        Created: Just now
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Placeholder Project 2</h5>
+                                        <p class="card-text text-secondary">This is another placeholder project. Showcase your skills and experience here.</p>
+                                        <a href="#" class="btn btn-primary">View Project</a>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        Created: Just now
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Placeholder Project 3</h5>
+                                        <p class="card-text text-secondary">Add more projects to fill up your portfolio. This is your chance to shine!</p>
+                                        <a href="#" class="btn btn-primary">View Project</a>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        Created: Just now
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container text-center text-sm">
+            &copy; <span id="current-year"></span> My Portfolio. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        document.querySelectorAll('.project-date').forEach(function(element) {
+            if (element.textContent.trim() === 'Just now') {
+                const now = new Date();
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                element.textContent = now.toLocaleDateString('en-US', options);
+            }
+        });
+    </script>
+</body>
+</html>
